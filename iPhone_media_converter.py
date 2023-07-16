@@ -1,15 +1,6 @@
 import os
-from wand.image import Image
 from moviepy.editor import *
 import shutil
-
-def convert_heic_to_jpeg(input_file, output_file):
-    with Image(filename=input_file) as image:
-        # Convert the image to JPEG
-        image.format = 'jpeg'
-
-        # Save the image as JPEG
-        image.save(filename=output_file)
 
 
 def video_to_mp4(input, output):
@@ -59,7 +50,7 @@ for i in range(heicCount):
     eachPhoto = heic[i]
     print(f'{i+1}/{heicCount} -- {eachPhoto}')
 
-    convert_heic_to_jpeg(os.path.join(source, eachPhoto), os.path.join(destination, eachPhoto.lower().replace('.heic', '.jpeg')))
+    os.system('magick "' + os.path.join(source, eachPhoto) + '" "' + os.path.join(destination, eachPhoto.lower().replace('.heic', '.jpg')) + '"')
 
 print("Converting Videos...")
 for i in range(movCount):
